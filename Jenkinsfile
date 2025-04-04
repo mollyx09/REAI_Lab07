@@ -4,8 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {                
-                echo 'In C or Java, we can compile our program in this step'
-                echo 'In Python, we can build our package here or skip this step'
+                echo 'Start Build'
             }
         }
         stage('Test') {
@@ -13,14 +12,12 @@ pipeline {
                 bat '''
                 echo Test Step: Running pytest in virtual environment 'mlip'
                 
-                call .venv\\mlip\\Scripts\\activate
+                call mlip\\Scripts\\activate
 
                 pip show pytest
 
                 python -m pytest
 
-
-                echo pytest completed successfully
                 '''
             }
         }
