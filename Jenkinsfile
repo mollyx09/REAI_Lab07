@@ -17,18 +17,16 @@ pipeline {
         stage('Test') {
             steps {
                 bat """
-                echo Checking Current Directory...
-                echo Current Directory: %cd%
-                dir
-
+                echo Test Step: Running pytest in virtual environment 'mlip'
+                
                 REM Activate the virtual environment (Windows)
-                call mlip\\Scripts\\activate || echo "Activation Failed"
+                call mlip\\Scripts\\activate
 
                 REM Check if pytest is installed
-                call pip show pytest || echo "pytest is not installed"
+                pip show pytest
 
                 REM Run pytest
-                call pytest --maxfail=1 --disable-warnings -v || echo "pytest run failed"
+                pytest --maxfail=1 --disable-warnings -v
 
                 echo pytest completed successfully
                 """
